@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Instrument Sans", "sans-serif";
+}
+
+/* brand */
+.brand {
+  @apply lg:text-[30px] font-semibold md:text-[26px] maxMd:text-[20px] cursor-pointer;
+}
+/* heading section */
+.heading {
+  @apply text-[20px] md:text-[36px] font-semibold;
+}
+
+/* hover bg-black text-white */
+.hoverBgBlack {
+  @apply hover:text-white hover:bg-blackText duration-500 ease-linear;
+}
+
+/* Nav menu */
+.menuItem:hover > .border-bottom {
+  width: 100%;
+}
+
+.menuItem:hover > span {
+  color: red;
+}
+
+.menuItem:hover .submenu {
+  display: grid;
+}
+
+.submenu::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+}
+
+/* slider */
+.slick-slide {
+  padding-left: 10px;
+}
