@@ -11,7 +11,7 @@ function App() {
     <div className='container mx-auto px-4 relative'>
       <Header />
       <Routes>
-        <Route path="/fashion/" element={<Home />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
     <Footer />
