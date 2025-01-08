@@ -24,6 +24,15 @@
   @apply hover:text-white hover:bg-blackText duration-500 ease-linear;
 }
 
+.hoverBgWhite {
+  @apply hover:text-blackText hover:bg-white duration-500 ease-linear;
+}
+
+/* button form sign up and login */
+.btnForm {
+  @apply mt-10 rounded-[4px] py-3 hoverBgWhite bg-blackText text-white cursor-pointer text-center border border-blackText font-medium;
+}
+
 /* Nav menu */
 .menuItem:hover > .border-bottom {
   width: 100%;

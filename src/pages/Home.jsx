@@ -3,7 +3,6 @@ import Banner from '../components/Banner'
 import Main from '../components/Main'
 import ShippingAndReturnInfo from '../components/ShippingAndReturnInfo'
 import Discount from '../components/Discount'
-
 const Home = () => {
   return (
     <div>
@@ -15,5 +14,6 @@ const Home = () => {
     </div>
   )
 }
+
 
 export default Home

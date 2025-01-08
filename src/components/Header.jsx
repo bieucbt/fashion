@@ -6,12 +6,14 @@ import MenuMobile from "./MenuMobile";
 import { useEffect, useState } from "react";
 import ModalSearch from "./ModalSearch";
 import BoxLogin from "./BoxLogin"
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [activeMenuMobile, setActiveMenuMobile] = useState(false)
   const [windowScrollY, setWindowScrollY] = useState(0)
   const [activeModalSearch, setActiveModalSearch] = useState(false)
   const [activeBoxLogin, setActiveBoxLogin] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const windowEventScrollY = window.addEventListener('scroll', () => {
@@ -43,7 +45,7 @@ const Header = () => {
         </div>
 
         <div className='flex items-center gap-[64px]'>
-          <div className='brand'>BieuCBT.</div>
+          <div className='brand' onClick={() => navigate('/')} >BieuCBT.</div>
           {/* nav menu */}
           <NavMenu />
         </div>
