@@ -14,7 +14,6 @@ const LoginSignupFromMobile = () => {
   }, [])
 
   function handleMoveTab(index = 0){
-    console.log(index)
     setTabSlider((draft) => {
       draft.width = headingRef.current[index].offsetWidth
       draft.left = headingRef.current[index].offsetLeft

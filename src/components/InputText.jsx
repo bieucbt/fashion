@@ -1,12 +1,18 @@
 import React, { memo } from 'react'
 
-const InputText = ({title, require, placeholder, type, className}) => {
+const InputText = ({value, title, require, placeholder, type, className, typeValue, setFormData}) => {
   return (
     <div className={className += ' mb-3'}>
       <label htmlFor={title} className='mb-2 text-[12px] font-semibold text-blackText'>{title} 
         {require && <span className='text-red-500 '> *</span>}</label><br></br>
-      <input type={type || 'text'} placeholder={placeholder} required={require} id={title}
-      className='px-4 py-[10px] text-[14px] font-normal outline-none border-gray-300 hover:border-blackText duration-500 ease-linear rounded-sm border w-full' />
+      <input type={type || 'text'} placeholder={placeholder} 
+      value={value || ''}
+      required={require} id={title}
+      onInput={(e) => {
+        setFormData && setFormData((draft) => {
+          draft[typeValue]=e.target.value})
+      }}
+      className='inputForm' />
     </div>
   )
 }

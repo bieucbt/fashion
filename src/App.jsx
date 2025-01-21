@@ -3,18 +3,21 @@ import Header from './components/Header'
 import Footer from './components/Footer';
 import './App.css'
 import { Home, LoginSignupForm } from './pages';
+import TokenProvider from './context/TokenProvider';
 
 function App() {
   
 
   return <BrowserRouter>
-    <div className='container mx-auto px-4 relative'>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/loginOrSignUp" element={<LoginSignupForm />} />
-      </Routes>
-    </div>
+    <TokenProvider>
+      <div className='container mx-auto px-4 relative'>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/loginOrSignUp" element={<LoginSignupForm />} />
+        </Routes>
+      </div>
+    </TokenProvider>
     <Footer />
   </BrowserRouter>
 }
