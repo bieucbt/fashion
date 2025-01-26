@@ -4,11 +4,13 @@ import Footer from './components/Footer';
 import './App.css'
 import { Home, LoginSignupForm } from './pages';
 import TokenProvider from './context/TokenProvider';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
-  
+
 
   return <BrowserRouter>
+    <ToastContainer />
     <TokenProvider>
       <div className='container mx-auto px-4 relative'>
         <Header />

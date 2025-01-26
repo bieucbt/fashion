@@ -1,26 +1,24 @@
+import { toast } from 'react-toastify';
 import validator from 'validator';
-import { showToastError } from './toast';
 
 export const validateForm = (formData, confirmPassword) => {
-  const {email, password } = formData;
+  const { email, password } = formData;
 
   // Kiểm tra các trường không được để trống
-  Object.keys(formData).forEach((key) => {
-    if (formData[key] == '') {
-      showToastError('Vui lòng nhập ô input, không để trống')
-      throw new Error('Vui lòng nhập ô input, không để trống');
-    }
-  });
-
+  if (email == '' || password == '' || confirmPassword == '') {
+    toast.error('Vui lòng nhập ô input, không để trống')
+    return false
+  }
   // Kiểm tra email
-  if (!validator.isEmail(email)) {
-    showToastError('Email không hợp lệ')
-    throw new Error('Email không hợp lệ');
+  else if (!validator.isEmail(email)) {
+    toast.error('Email không hợp lệ')
+    return false
+  }
+  // Kiểm tra mật khẩu
+  else if (confirmPassword !== password) {
+    toast.error('Mật khẩu không trùng khớp')
+    return false
   }
 
-  // Kiểm tra mật khẩu
-  if (confirmPassword !== password) {
-    showToastError('Mật khẩu không trùng khớp')
-    throw new Error('Mật khẩu không trùng khớp');
-  }
+  return true
 };
