@@ -17,21 +17,26 @@ const Login = () => {
 
 
   const handelLogin = () => {
-    axios.post(BASE_URL + '/login', formData)
-      .then(res => {
-        if (res.data.isAdmin) {
-          window.location.href = Admin_URL;
-        }
-        else {
-          toast.success('Đăng nhập thành công')
-          localStorage.setItem('token', res.data.token)
-          setToken(localStorage.getItem('token'))
-          navigate('/')
-        }
-      })
-      .catch(err => {
-        toast.error('Tài khoản hoặc mật khẩu không chính xác')
-      })
+    if (formData.email == '' || formData.password == '') {
+      toast.error('Vui lòng nhập ô input, không để trống')
+    }
+    else {
+      axios.post(BASE_URL + '/login', formData)
+        .then(res => {
+          if (res.data.isAdmin) {
+            window.location.href = Admin_URL;
+          }
+          else {
+            toast.success('Đăng nhập thành công')
+            localStorage.setItem('token', res.data.token)
+            setToken(localStorage.getItem('token'))
+            navigate('/')
+          }
+        })
+        .catch(err => {
+          toast.error('Tài khoản hoặc mật khẩu không chính xác')
+        })
+    }
   }
   return (
     <div>
