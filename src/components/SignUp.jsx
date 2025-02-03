@@ -50,7 +50,7 @@ const SignUp = () => {
             <label htmlFor='comfirmPass' className='mb-2 text-[12px] font-semibold text-blackText'>Xác nhận mật khẩu
               <span className='text-red-500 '> *</span></label><br></br>
             <input type='password' placeholder='Nhập lại mật khẩu xác nhận' required={true} id='comfirmPass'
-              value={comfirmPass}
+              value={comfirmPass.trim()}
               onInput={(e) => setComfirmPass(e.target.value)}
               className='inputForm' />
           </div>
