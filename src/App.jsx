@@ -3,8 +3,8 @@ import Header from './components/Header'
 import Footer from './components/Footer';
 import './App.css'
 import { Home, LoginSignupForm, ProductList } from './pages';
-import DataProvider from './context/DataProvider';
 import { ToastContainer } from 'react-toastify';
+import DataProvider from './context/DataProvider';
 
 function App() {
 
