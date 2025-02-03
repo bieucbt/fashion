@@ -2,10 +2,10 @@ import React from 'react'
 import InputText from './InputText'
 import axios from 'axios'
 import { useImmer } from 'use-immer'
-import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import useTokenContext from '../hook/useTokenContext'
-import { Admin_URL, BASE_URL } from '../config/constants'
+import { Admin_URL, USER_URL } from '../config/constants'
+import useToastContext from '../hook/useToastContext'
 
 const Login = () => {
   const [formData, setFormData] = useImmer({
@@ -13,28 +13,28 @@ const Login = () => {
     password: ''
   })
   const navigate = useNavigate()
-  const { token, setToken } = useTokenContext()
-
+  const { setToken } = useTokenContext()
+  const { showToast } = useToastContext()
 
   const handelLogin = () => {
     if (formData.email == '' || formData.password == '') {
-      toast.error('Vui lòng nhập ô input, không để trống')
+      showToast('error', 'Vui lòng nhập ô input, không để trống')
     }
     else {
-      axios.post(BASE_URL + '/login', formData)
+      axios.post(USER_URL + '/login', formData)
         .then(res => {
           if (res.data.isAdmin) {
             window.location.href = Admin_URL;
           }
           else {
-            toast.success('Đăng nhập thành công')
+            showToast('success', 'Đăng nhập thành công')
             localStorage.setItem('token', res.data.token)
             setToken(localStorage.getItem('token'))
             navigate('/')
           }
         })
         .catch(err => {
-          toast.error('Tài khoản hoặc mật khẩu không chính xác')
+          showToast('error', 'Tài khoản hoặc mật khẩu không chính xác')
         })
     }
   }

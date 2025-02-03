@@ -3,54 +3,56 @@
 export const menuData = [
   {
     title: 'Trang chủ',
+    href: '/',
     col: 1
   },
   {
     title: 'Sản Phẩm',
-    col: 4,
-    submenu: [
-      {
-        heading: 'Đồ Nam',
-        list: [
-          "Giảm giá từ 50%",
-          "Áo khoác | Áo măng tô",
-          "Áo len | Áo cardigan",
-          "Áo sơ mi | Áo nỉ",
-          "Xem tất cả"
-        ]
-      },
-      {
-        heading: 'Đồ Nữ',
-        list: [
-          "Giảm giá từ 60%",
-          "Đầm | Jumpsuit",
-          "Áo thun | Áo nỉ",
-          "Phụ kiện | Trang sức",
-          "Xem tất cả"
-        ]
-      },
-      {
-        heading: 'Đồ Trẻ em',
-        list: [
-          "Giường trẻ em",
-          "Đồ chơi bé trai",
-          "Chăn em bé",
-          "Quần áo sơ sinh",
-          "Xem tất cả"
-        ]
-      },
-      {
-        heading: 'Đồ nhà cửa',
-        list: [
-          "Nội thất | Trang trí",
-          "Bàn | Phòng khách",
-          "Ghế | Phòng làm việc",
-          "Đèn | Phòng ngủ",
-          "Xem tất cả"
-        ]
-      }
-    ]
-    
+    href: '/productList',
+    col: 1,
+    // submenu: [
+    //   {
+    //     heading: 'Đồ Nam',
+    //     list: [
+    //       "Giảm giá từ 50%",
+    //       "Áo khoác | Áo măng tô",
+    //       "Áo len | Áo cardigan",
+    //       "Áo sơ mi | Áo nỉ",
+    //       "Xem tất cả"
+    //     ]
+    //   },
+    //   {
+    //     heading: 'Đồ Nữ',
+    //     list: [
+    //       "Giảm giá từ 60%",
+    //       "Đầm | Jumpsuit",
+    //       "Áo thun | Áo nỉ",
+    //       "Phụ kiện | Trang sức",
+    //       "Xem tất cả"
+    //     ]
+    //   },
+    //   {
+    //     heading: 'Đồ Trẻ em',
+    //     list: [
+    //       "Giường trẻ em",
+    //       "Đồ chơi bé trai",
+    //       "Chăn em bé",
+    //       "Quần áo sơ sinh",
+    //       "Xem tất cả"
+    //     ]
+    //   },
+    //   {
+    //     heading: 'Đồ nhà cửa',
+    //     list: [
+    //       "Nội thất | Trang trí",
+    //       "Bàn | Phòng khách",
+    //       "Ghế | Phòng làm việc",
+    //       "Đèn | Phòng ngủ",
+    //       "Xem tất cả"
+    //     ]
+    //   }
+    // ]
+
   },
   {
     title: 'Cửa hàng',

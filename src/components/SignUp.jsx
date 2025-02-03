@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useImmer } from 'use-immer'
-import { toast } from 'react-toastify';
 import InputText from './InputText'
 import { validateForm } from '../utils/validateForm';
 import axios from 'axios'
-import { BASE_URL } from '../config/constants'
+import { USER_URL } from '../config/constants'
+import useToastContext from '../hook/useToastContext';
 
 const SignUp = () => {
   const [formdata, setFormData] = useImmer({
@@ -12,12 +12,12 @@ const SignUp = () => {
     password: ''
   })
   const [comfirmPass, setComfirmPass] = useState('')
-
+  const { showToast, dissmisToast } = useToastContext()
 
   const handleSubmit = useCallback(() => {
 
-    if (validateForm(formdata, comfirmPass)) {
-      axios.post(BASE_URL + 'signup', formdata)
+    if (validateForm(formdata, comfirmPass, showToast)) {
+      axios.post(USER_URL + 'signup', formdata)
         .then(data => {
           if (data.status >= 200 && data.status < 300) {
             console.log(data)
@@ -25,14 +25,14 @@ const SignUp = () => {
               setFormData(draft => { draft[key] = '' })
             })
             setComfirmPass('')
-            toast.success('Đăng ký thành công')
+            showToast('success', 'Đăng ký thành công')
           }
         })
         .catch(err => {
           if (err.response)
-            toast.error(err.response.data.message)
+            showToast('error', err.response.data.message)
           else if (err.message)
-            toast.error(err.message)
+            showToast('error', err.message)
         })
     }
   }, [formdata, comfirmPass])

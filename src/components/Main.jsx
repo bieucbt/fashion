@@ -8,7 +8,7 @@ const Main = () => {
     <main className='mt-5 flex flex-col gap-20'>
       <NavigationBar />
       <ExploreCollections />
-      <Trending />
+      {/* <Trending /> */}
     </main>
   )
 }

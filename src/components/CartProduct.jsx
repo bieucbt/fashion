@@ -1,10 +1,11 @@
 import React from 'react'
 import { memo } from 'react'
-import {tShirt} from '../assets'
+import { tShirt } from '../assets'
 import { CiHeart } from "react-icons/ci";
 import { RiResetLeftFill } from "react-icons/ri";
 
-const CartProduct = () => {
+const CartProduct = ({ product }) => {
+  console.log(product)
   return (
     <div className='group flex flex-col items-center rounded-3xl cursor-pointer'>
       <div className='relative overflow-hidden'>
@@ -29,11 +30,11 @@ const CartProduct = () => {
         </div>
       </div>
       <div className='mt-5'>
-        <h3 className='text-blackText font-medium'>Áo mùa đông thanh lịch</h3>
+        <h3 className='text-blackText font-medium'></h3>
         <div className='flex items-center gap-1 flex-col text-blackText font-medium'>
           <p className=''>299.000 VNĐ</p>
           <div className='flex items-center gap-4'>
-            <p className='line-through text-[14px] text-grayText'>300.000 VNĐ</p>
+            <p className='line-through text-[14px] text-grayText'>VNĐ</p>
             <p className='px-3 bg-[#D2EF9E] rounded-3xl text-blackText font-normal'>-1%</p>
           </div>
         </div>
