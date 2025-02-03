@@ -3,9 +3,9 @@ import InputText from './InputText'
 import axios from 'axios'
 import { useImmer } from 'use-immer'
 import { useNavigate } from 'react-router-dom';
-import useTokenContext from '../hook/useTokenContext'
 import { Admin_URL, USER_URL } from '../config/constants'
-import useToastContext from '../hook/useToastContext'
+import { showToast } from '../utils/toastUtils';
+import useDataContext from '../hook/useDataContext';
 
 const Login = () => {
   const [formData, setFormData] = useImmer({
@@ -13,10 +13,10 @@ const Login = () => {
     password: ''
   })
   const navigate = useNavigate()
-  const { setToken } = useTokenContext()
-  const { showToast } = useToastContext()
+  const { setToken } = useDataContext()
 
   const handelLogin = () => {
+    showToast('loading', 'Đang xử lý vui lòng đợi')
     if (formData.email == '' || formData.password == '') {
       showToast('error', 'Vui lòng nhập ô input, không để trống')
     }

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import useDataContext from '../hook/useDataContext'
 import { PRODUCT_URL } from '../config/constants'
 import axios from 'axios'
-import useToastContext from '../hook/useToastContext'
 import { FaFilter } from "react-icons/fa";
 import CartProduct from '../components/CartProduct'
+import { showToast } from '../utils/toastUtils';
 
 const ProductList = () => {
     const { headerHeight } = useDataContext()
     const [products, setProducts] = useState([])
-    const { showtoast } = useToastContext()
 
     useEffect(() => {
         const getAllProducts = async () => {
@@ -17,7 +16,7 @@ const ProductList = () => {
                 const res = await axios.get(PRODUCT_URL)
                 setProducts(res.data)
             } catch (err) {
-                showtoast('error', err.message)
+                showToast('error', err.message)
             }
         }
 

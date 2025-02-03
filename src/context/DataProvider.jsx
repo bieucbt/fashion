@@ -5,8 +5,13 @@ export const DataContext = createContext()
 
 const DataProvider = ({ children }) => {
     const [headerHeight, setHeaderHeight] = useState(0)
+    const [token, setToken] = useState(localStorage.getItem('token') || '')
+    const data = {
+        headerHeight, setHeaderHeight,
+        token, setToken
+    }
     return (
-        <DataContext.Provider value={{ headerHeight, setHeaderHeight }}>
+        <DataContext.Provider value={data}>
             {children}
         </DataContext.Provider>
     )

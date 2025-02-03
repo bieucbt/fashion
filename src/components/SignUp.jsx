@@ -4,7 +4,8 @@ import InputText from './InputText'
 import { validateForm } from '../utils/validateForm';
 import axios from 'axios'
 import { USER_URL } from '../config/constants'
-import useToastContext from '../hook/useToastContext';
+import { showToast } from '../utils/toastUtils';
+
 
 const SignUp = () => {
   const [formdata, setFormData] = useImmer({
@@ -12,10 +13,9 @@ const SignUp = () => {
     password: ''
   })
   const [comfirmPass, setComfirmPass] = useState('')
-  const { showToast, dissmisToast } = useToastContext()
 
   const handleSubmit = useCallback(() => {
-
+    showToast('loading', 'Đang xử lý vui lòng đợi!')
     if (validateForm(formdata, comfirmPass, showToast)) {
       axios.post(USER_URL + 'signup', formdata)
         .then(data => {

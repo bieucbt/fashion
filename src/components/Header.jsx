@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import ModalSearch from "./ModalSearch";
 import BoxLogin from "./BoxLogin"
 import { useNavigate } from "react-router-dom";
-import useTokenContext from "../hook/useTokenContext";
 import useDataContext from "../hook/useDataContext";
 
 const Header = () => {
@@ -16,8 +15,7 @@ const Header = () => {
   const [activeModalSearch, setActiveModalSearch] = useState(false)
   const [activeBoxLogin, setActiveBoxLogin] = useState(false)
   const navigate = useNavigate()
-  const { token, setToken } = useTokenContext()
-  const { setHeaderHeight } = useDataContext()
+  const { setHeaderHeight, token, setToken } = useDataContext()
 
   const headerHeightRef = useRef(null)
 
