@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { DataContext } from "../context/DataProviderataProvider"
+import { DataContext } from "../context/DataProvider"
 
 
 const useDataContext = () => {
