@@ -1,11 +1,12 @@
 import React from 'react'
 import { memo } from 'react'
-import { tShirt } from '../assets'
 import { CiHeart } from "react-icons/ci";
 import { RiResetLeftFill } from "react-icons/ri";
+import { CLOUDINARY_URL } from '../config/constants';
 
 const CartProduct = ({ product }) => {
-  console.log(product)
+  const img_url = CLOUDINARY_URL + product.img
+
   return (
     <div className='group flex flex-col items-center rounded-3xl cursor-pointer'>
       <div className='relative overflow-hidden'>
@@ -16,7 +17,7 @@ const CartProduct = ({ product }) => {
           <div className='w-[25px] aspect-square rounded-full bg-white grid place-items-center
           hover:bg-blackText hover:text-white duration-300 ease-linear cursor-pointer mt-1'><RiResetLeftFill /></div>
         </div>
-        <img src={tShirt} alt="" className='aspect-9/16 h-[350px] sm:h-[450px]  md:h-full  object-cover' />
+        <img src={img_url} alt={product.category} className='aspect-9/16 h-[250px] sm:h-[350px]  md:h-[400px]  object-cover' />
         <div className='absolute w-full bottom-[-25%] right-[50%] translate-x-[50%] group-hover:bottom-5
         ease-linear duration-300 sm:bottom-[-15%]'>
           <div className='w-full flex flex-col items-center gap-3 text-center px-3 sm:flex-row'>
@@ -32,10 +33,10 @@ const CartProduct = ({ product }) => {
       <div className='mt-5'>
         <h3 className='text-blackText font-medium'></h3>
         <div className='flex items-center gap-1 flex-col text-blackText font-medium'>
-          <p className=''>299.000 VNĐ</p>
+          <p className=''>{product.price} VNĐ</p>
           <div className='flex items-center gap-4'>
-            <p className='line-through text-[14px] text-grayText'>VNĐ</p>
-            <p className='px-3 bg-[#D2EF9E] rounded-3xl text-blackText font-normal'>-1%</p>
+            <p className='line-through text-[14px] text-grayText'>{product.price} VNĐ</p>
+            <p className='px-3 bg-[#D2EF9E] rounded-3xl text-blackText font-normal'>0%</p>
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@ const Login = () => {
   const { setToken } = useDataContext()
 
   const handelLogin = () => {
+    showToast('loading', 'đang xử lý xin vui lòng đợi')
     if (formData.email == '' || formData.password == '') {
       showToast('error', 'Vui lòng nhập ô input, không để trống')
     }

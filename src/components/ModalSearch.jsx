@@ -2,12 +2,12 @@ import React, { memo } from 'react'
 import Search from './Search'
 import CartProduct from './CartProduct'
 
-const ModalSearch = ({activeModalSearch, setActiveModalSearch}) => {
+const ModalSearch = ({ activeModalSearch, setActiveModalSearch }) => {
 
   return (
     <div className={!activeModalSearch ? 'hidden' : 'fixed inset-0  z-10 '}>
       <div className='bg-[#545454] opacity-45 absolute inset-0 '
-      onClick={() => setActiveModalSearch(false)}></div>
+        onClick={() => setActiveModalSearch(false)}></div>
       <div className='h-full grid place-items-center over'>
         <div className='relative place-items-center bg-white p-5 z-[10] w-[80%] m-auto rounded-xl'>
           <Search className='w-full' />
@@ -20,9 +20,9 @@ const ModalSearch = ({activeModalSearch, setActiveModalSearch}) => {
           </div>
           <h3 className='text-[18px] font-semibold mt-4'>Sản phẩm đã xem gần đây</h3>
           <div className='w-full flex items-start'>
+            {/* <CartProduct />
             <CartProduct />
-            <CartProduct />
-            <CartProduct />
+            <CartProduct /> */}
           </div>
         </div>
       </div>
@@ -30,4 +30,4 @@ const ModalSearch = ({activeModalSearch, setActiveModalSearch}) => {
   )
 }
 
-export default  memo(ModalSearch)
+export default memo(ModalSearch)

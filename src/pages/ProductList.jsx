@@ -23,17 +23,16 @@ const ProductList = () => {
         getAllProducts()
     }, [])
 
-
     return (
         <div className='' style={{ marginTop: headerHeight + 'px' }}>
-            <div>
-                <div><FaFilter /><span>lọc sản phẩm</span></div>
+            <div className='py-5 cursor-pointer'>
+                <div className='flex items-center gap-2'><FaFilter /><span>lọc sản phẩm</span></div>
             </div>
-            <div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3'>
                 {
-                    products.map((product, i) => {
-                        <CartProduct key={i} product={product} />
-                    })
+                    products.map((product) => (
+                        <CartProduct key={product._id} product={product} />
+                    ))
                 }
             </div>
         </div>
