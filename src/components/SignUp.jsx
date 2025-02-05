@@ -15,8 +15,8 @@ const SignUp = () => {
   const [comfirmPass, setComfirmPass] = useState('')
 
   const handleSubmit = useCallback(() => {
-    showToast('loading', 'đang xử lý xin vui lòng đợi')
     if (validateForm(formdata, comfirmPass, showToast)) {
+      showToast('loading', 'đang xử lý xin vui lòng đợi')
       axios.post(USER_URL + 'signup', formdata)
         .then(data => {
           if (data.status >= 200 && data.status < 300) {
