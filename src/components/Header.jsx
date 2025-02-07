@@ -8,6 +8,7 @@ import ModalSearch from "./ModalSearch";
 import BoxLogin from "./BoxLogin"
 import { useNavigate } from "react-router-dom";
 import useDataContext from "../hook/useDataContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const [activeMenuMobile, setActiveMenuMobile] = useState(false)
@@ -62,14 +63,19 @@ const Header = () => {
           <div className='maxMd:hidden cursor-pointer'
             onClick={() => setActiveModalSearch(true)}><IoSearch size={25} /></div>
           {
-            token ? <div className="relative group">
-              <span className="cursor-pointer">tài khoản</span>
-              <div className="hidden absolute top-full right-0 bg-green-300 group-hover:block w-max
-              cursor-pointer" onClick={() => {
-                  localStorage.removeItem('token')
-                  setToken('')
-                }}>
-                Đăng xuất
+            token ? <div className="">
+              <div className="flex items-center gap-5">
+                <FaShoppingCart size={30} className="cursor-pointer" />
+                <div className="relative group">
+                  <span className="cursor-pointer peer">tài khoản</span>
+                  <div className="hidden absolute top-full right-0 bg-green-300 group-hover:block w-max
+                  cursor-pointer" onClick={() => {
+                      localStorage.removeItem('token')
+                      setToken('')
+                    }}>
+                    Đăng xuất
+                  </div>
+                </div>
               </div>
             </div> :
               <div className='cursor-pointer '

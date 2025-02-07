@@ -28,13 +28,17 @@ const ProductList = () => {
             <div className='py-5 cursor-pointer'>
                 <div className='flex items-center gap-2'><FaFilter /><span>lọc sản phẩm</span></div>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3'>
-                {
-                    products.map((product) => (
-                        <CartProduct key={product._id} product={product} />
-                    ))
-                }
-            </div>
+            {
+                products.length > 0 ?
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3'>
+                        {
+                            products.map((product) => (
+                                <CartProduct key={product._id} product={product} />
+                            ))
+                        }
+                    </div>
+                    : <div className='flex items-center gap-2'><span>tải danh sách sản phẩm</span><div className='border-solid border-[4px] h-[20px] w-[20px] rounded-full border-black border-t-red-600 animate-spin'></div> </div>
+            }
         </div>
     )
 }
