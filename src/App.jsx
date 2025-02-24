@@ -5,6 +5,8 @@ import './App.css'
 import { Home, LoginSignupForm, ProductList } from './pages';
 import { ToastContainer } from 'react-toastify';
 import DataProvider from './context/DataProvider';
+import ProductDetailPage from './pages/ProductDetailPage';
+import CartPage from './pages/CartPage';
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/loginOrSignUp" element={<LoginSignupForm />} />
             <Route path="/productList" element={<ProductList />} />
+            <Route path="/productDetail" element={<ProductDetailPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Routes>
         </div>
       </DataProvider>

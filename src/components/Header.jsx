@@ -9,6 +9,8 @@ import BoxLogin from "./BoxLogin"
 import { useNavigate } from "react-router-dom";
 import useDataContext from "../hook/useDataContext";
 import { FaShoppingCart } from "react-icons/fa";
+import { showToast } from "../utils/toastUtils";
+import { HOME_fASHION } from "../config/constants";
 
 const Header = () => {
   const [activeMenuMobile, setActiveMenuMobile] = useState(false)
@@ -16,9 +18,9 @@ const Header = () => {
   const [activeModalSearch, setActiveModalSearch] = useState(false)
   const [activeBoxLogin, setActiveBoxLogin] = useState(false)
   const navigate = useNavigate()
-  const { setHeaderHeight, token, setToken } = useDataContext()
-
+  const { setHeaderHeight, cart, logout, email, token } = useDataContext()
   const headerHeightRef = useRef(null)
+
 
   useEffect(() => {
 
@@ -34,11 +36,20 @@ const Header = () => {
       if (window.innerWidth > 1023) setActiveMenuMobile(false)
       setHeaderHeight(headerHeightRef.current.offsetHeight)
     })
+
     return () => {
       window.removeEventListener('scroll', windowEventScrollY)
       window.removeEventListener('resize', windowEventResize)
     }
   }, [])
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+    showToast('success', 'Đăng xuất thành công')
+  }
+
+
   return (
     <header ref={headerHeightRef} className={`fixed top-0 left-0 right-0 duration-300 ease-linear ${windowScrollY > 1 && 'bg-white shadow-menu'} z-50`}>
       <div className="container mx-auto h-[74px] flex items-center justify-between text-blackText px-4">
@@ -65,14 +76,16 @@ const Header = () => {
           {
             token ? <div className="">
               <div className="flex items-center gap-5">
-                <FaShoppingCart size={30} className="cursor-pointer" />
+                <div className="relative cursor-pointer">
+                  <FaShoppingCart size={30} className=""
+                    onClick={() => navigate('/cart')} />
+                  {Object.keys(cart).length > 0 && <div className="absolute bottom-[-5px] right-[-5px] rounded-full h-[20px] grid place-content-center text-white bg-red-600 
+                  aspect-square">{Object.keys(cart).length || undefined}</div>}
+                </div>
                 <div className="relative group">
-                  <span className="cursor-pointer peer">tài khoản</span>
+                  <span className="cursor-pointer peer">{email || 'tài khoản'}</span>
                   <div className="hidden absolute top-full right-0 bg-green-300 group-hover:block w-max
-                  cursor-pointer" onClick={() => {
-                      localStorage.removeItem('token')
-                      setToken('')
-                    }}>
+                  cursor-pointer" onClick={handleLogout}>
                     Đăng xuất
                   </div>
                 </div>

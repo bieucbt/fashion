@@ -13,7 +13,7 @@ const Login = () => {
     password: ''
   })
   const navigate = useNavigate()
-  const { setToken } = useDataContext()
+  const { login } = useDataContext()
 
   const handelLogin = () => {
     if (formData.email == '' || formData.password == '') {
@@ -21,15 +21,13 @@ const Login = () => {
     }
     else {
       showToast('loading', 'đang xử lý xin vui lòng đợi')
-      axios.post(USER_URL + '/login', formData)
+      axios.post(USER_URL + 'login', formData)
         .then(res => {
           if (res.data.isAdmin) {
             window.location.href = Admin_URL;
           }
           else {
-            showToast('success', 'Đăng nhập thành công')
-            localStorage.setItem('token', res.data.token)
-            setToken(localStorage.getItem('token'))
+            login(res.data)
             navigate('/')
           }
         })
