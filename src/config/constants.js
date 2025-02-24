@@ -10,7 +10,7 @@ const HOME_fASHION = 'https://fashion-ewea.onrender.com/'
 // const Admin_URL = 'http://localhost:5174/'
 // const HOME_fASHION = 'http://localhost:5173/'
 
-// const CLOUDINARY_URL = 'https://res.cloudinary.com/ddttnwsqh/image/upload/v1737878119/'
+const CLOUDINARY_URL = 'https://res.cloudinary.com/ddttnwsqh/image/upload/v1737878119/'
 
 export {
     Admin_URL,
