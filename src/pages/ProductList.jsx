@@ -1,7 +1,7 @@
 import React from 'react'
 import useDataContext from '../hook/useDataContext'
 import { FaFilter } from "react-icons/fa";
-import CartProduct from '../components/CartProduct'
+import ProductPageNumbers from '@components/ProductPageNumbers';
 
 const ProductList = () => {
     const { headerHeight, products } = useDataContext()
@@ -15,13 +15,7 @@ const ProductList = () => {
             </div>
             {
                 products.length > 0 ?
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3'>
-                        {
-                            products.map((product) => (
-                                <CartProduct key={product._id} product={product} />
-                            ))
-                        }
-                    </div>
+                    <ProductPageNumbers />
                     : <div className='flex items-center gap-2'><span>Đang tải dữ liệu có thể mất vài tiếng, bạn vui lòng đợi chút xíu thôi nha!</span><div className='border-solid border-[4px] h-[20px] w-[20px] rounded-full border-black border-t-red-600 animate-spin'></div> </div>
             }
         </div>

@@ -1,18 +1,22 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import useDataContext from '../hook/useDataContext'
 import { CLOUDINARY_URL } from '../config/constants'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 
 const CartPage = () => {
     const { headerHeight, products, cart, removeItemCart } = useDataContext()
+    const [listProductCart, setListProductCart] = useState([])
 
-    const productCart = useMemo(() => {
-        const arr = []
-        Object.entries(cart).forEach(item => {
-            arr.push({ ...products.find(product => product._id == item[0]), count: item[1] })
-        })
-        return arr
-    }, [cart]) || []
+    useEffect(() => {
+        const draft = []
+        const productCart = () => {
+            Object.entries(cart).forEach(item => {
+                draft.push({ ...products.find(product => product._id == item[0]), count: item[1] })
+            })
+        }
+        productCart()
+        setListProductCart(draft)
+    }, [cart])
 
 
 
@@ -24,7 +28,7 @@ const CartPage = () => {
                 <span>quay lại</span>
             </div>
             {
-                productCart.length > 0 ?
+                listProductCart.length > 0 ?
                     <div className='text-center'>
                         <div className='grid grid-cols-6 gap-3  border-b-[1px] border-gray-200 pb-5 capitalize
                     text-grayText'>
@@ -36,7 +40,7 @@ const CartPage = () => {
                             <div>xóa</div>
                         </div>
                         {
-                            productCart.map((product, id) => <div key={id}
+                            listProductCart.map((product, id) => <div key={id}
                                 className='grid grid-cols-6 my-2 items-center border-b-[1px] border-gray-200 pb-5'>
                                 <div><img src={CLOUDINARY_URL + product.img} alt="product" /></div>
                                 <div>{product.name}</div>

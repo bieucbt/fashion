@@ -7,12 +7,21 @@ import useDataContext from '../hook/useDataContext';
 import { useNavigate } from 'react-router-dom';
 
 const CartProduct = ({ product }) => {
+
   const img_url = CLOUDINARY_URL + product.img
   const { token, addToCart } = useDataContext()
   const navigate = useNavigate()
   return (
     <div className='group flex flex-col items-center rounded-3xl cursor-pointer'>
       <div className='relative overflow-hidden'>
+        {
+          product.count <= 0 && <div className='absolute top-0 left-0 right-0
+              bottom-0 z-[49]'>
+            <div className='w-full h-full bg-gray-300 opacity-50'></div>
+            <h3 className='text-red-500 font-bold text-[20px] absolute top-[50%]
+            left-[50%] translate-x-[-50%]'>Hết Hàng</h3>
+          </div>
+        }
         <div className='absolute top-[2%] left-[5%] px-3 bg-[#DB4444] rounded-3xl text-white font-normal '>Sale</div>
         <div className='absolute top-[2%] right-[10px] sm:right-[-15%] duration-300 ease-linear group-hover:right-[5%]'>
           <div className='w-[25px] aspect-square rounded-full bg-white grid place-items-center

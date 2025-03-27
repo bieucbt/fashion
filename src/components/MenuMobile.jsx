@@ -3,10 +3,12 @@ import { RxCross1 } from "react-icons/rx";
 import Search from './Search';
 import { menuData } from './../data/menuData';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 
 const MenuMobile = ({ activeMenuMobile, setActiveMenuMobile }) => {
 
   const [indexMenu, setIndexMenu] = useState(0)
+  const navigator = useNavigate()
 
   useEffect(() => {
     const windowEventResize = window.addEventListener('resize', () => {
@@ -29,13 +31,15 @@ const MenuMobile = ({ activeMenuMobile, setActiveMenuMobile }) => {
       </div>
       <div><Search /></div>
       <nav className={'mt-5 relative h-full mr-[-32px]'}>
-        <ul className='flex flex-col gap-3 cursor-pointer'>
+        <ul className='flex flex-col gap-3 cursor-pointer pl-2'>
           {
             menuData.map((item, i) => <li key={i}
               onClick={() => {
                 if (indexMenu == i + 1) setIndexMenu(0)
                 else setIndexMenu(i + 1)
-              }}> <div className='flex items-center justify-between'><span className='text-[18px] font-semibold'>{item.title} </span><IoIosArrowForward /></div>
+                navigator(item.href)
+                setActiveMenuMobile(false)
+              }}> <div className='flex items-center justify-between'><span className='text-[18px] font-semibold'>{item.title} </span> {item.submenu && <IoIosArrowForward />}</div>
               {/* submenu */}
               {item.submenu && <div className={`absolute top-0 bg-white h-full duration-500 ease-linear ${indexMenu == i + 1 ? 'left-0' : 'left-[110%]'}`}>
                 <div className='flex items-center gap-1 cursor-pointer' onClick={() => setIndexMenu(0)}>
