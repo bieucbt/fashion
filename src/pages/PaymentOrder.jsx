@@ -63,9 +63,8 @@ const PaymentOrder = () => {
 
     return (
         <div style={{ marginTop: headerHeight + 'px' }} className='h-[48vh] relative'>
-            <h3>hello</h3>
-            {/* <OrderReview {...{ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }} />
-            <div>
+            <OrderReview {...{ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }} />
+            {/* <div>
                 <div className='flex items-center gap-1'>
                     <CiLocationOn /> <p className='capitalize'>Địa Chỉ Nhận Hàng</p>
                 </div>
@@ -109,7 +108,7 @@ const PaymentOrder = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className='text-[20px] font-bold flex items-center mt-10'>
                 <div className=' hoverBgWhite hover:border cursor-pointer bg-black text-white rounded-md px-3 py-1'
                     onClick={() => {
@@ -119,7 +118,7 @@ const PaymentOrder = () => {
                         } else
                             setHiddenBoxPayment(true)
                     }}>Mua Hàng</div>
-            </div> */}
+            </div>
         </div>
     )
 }
