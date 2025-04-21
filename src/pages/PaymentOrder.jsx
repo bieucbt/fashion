@@ -64,12 +64,12 @@ const PaymentOrder = () => {
     return (
         <div style={{ marginTop: headerHeight + 'px' }} className='h-[48vh] relative'>
             <OrderReview {...{ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }} />
-            {/* <div>
+            <div>
                 <div className='flex items-center gap-1'>
                     <CiLocationOn /> <p className='capitalize'>Địa Chỉ Nhận Hàng</p>
                 </div>
                 <div>{!province && <p>Đang tải dữ liệu tỉnh thành <div className='animate-spin border-[2px] border-t-red-200'></div></p>}</div>
-                <div className='flex items-center mt-5 gap-3'>
+                {/* <div className='flex items-center mt-5 gap-3'>
                     <LocationSelect chooseProvince {...{
                         title: 'Thành Phố/Tỉnh', setRecipientInfo,
                         dataLocation: province, updateIdSelect: setIdProvince, idSelect: idProvince,
@@ -85,7 +85,7 @@ const PaymentOrder = () => {
                         dataLocation: commune, updateIdSelect: setIdCommune, idSelect: idCommune,
                         nameIdSelect: 'idCommune', nameSelect: 'commune'
                     }} />
-                </div>
+                </div> */}
                 <div className='mt-2'>
                     <label htmlFor="">Địa chỉ cụ thể số nhà/Làng <span className='text-red-500'>*</span></label>
                     <input type="text" className='border ml-2  px-2 py-1' value={recipientInfo.addressDetail}
@@ -108,7 +108,7 @@ const PaymentOrder = () => {
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
             <div className='text-[20px] font-bold flex items-center mt-10'>
                 <div className=' hoverBgWhite hover:border cursor-pointer bg-black text-white rounded-md px-3 py-1'
                     onClick={() => {
