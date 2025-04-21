@@ -22,8 +22,6 @@ const LocationSelect = ({ title, dataLocation, setRecipientInfo, updateIdSelect,
         }
     }, [selectId, idSelect])
 
-
-
     return (
         <div>
             <label htmlFor="province">{title} <span className='text-red-500'>*</span></label><br />

@@ -10,13 +10,10 @@ import OrderReview from '@components/OrderReview';
 
 
 const PaymentOrder = () => {
-    const { headerHeight } = useDataContext()
-    const [province, setProvince] = useState(JSON.parse(localStorage.getItem('province')) || [])
-    const [district, setDistrict] = useState(JSON.parse(localStorage.getItem('district')) || [])
-    const [commune, setCommune] = useState(JSON.parse(localStorage.getItem('commune')) || [])
-    const [idProvince, setIdProvince] = useState('01')
-    const [idDistrict, setIdDistrict] = useState('001')
-    const [idCommune, setIdCommune] = useState('00001')
+    const { headerHeight, province, district, commune, setDistrict, setCommune, idProvince, setIdProvince, idDistrict, setIdDistrict,
+        idCommune, setIdCommune
+    } = useDataContext()
+
     const [recipientInfo, setRecipientInfo] = useImmer({
         province: '',
         district: '',
@@ -27,40 +24,6 @@ const PaymentOrder = () => {
     })
     const [hiddenBoxPayment, setHiddenBoxPayment] = useState(false)
 
-    useEffect(() => {
-        axios.get(PROVINCE_URL)
-            .then(res => {
-                localStorage.setItem('province', JSON.stringify(res.data))
-                setIdProvince(res.data[0].idProvince)
-            })
-            .catch(err => console.log(err))
-    }, [])
-
-    useEffect(() => {
-        axios.get(DISTRICT_URL + (idProvince || '001'))
-            .then(res => {
-                setIdDistrict(res.data[0].idDistrict || '001')
-                setDistrict(res.data)
-                localStorage.setItem('district', JSON.stringify(res.data))
-                axios.get(COMMUNE_URL + (res.data[0].idDistrict))
-                    .then(res => {
-                        setCommune(res.data)
-                        setIdCommune(res.data[0].idCommune)
-                        localStorage.setItem('commune', JSON.stringify(res.data))
-                    })
-            })
-    }, [idProvince])
-
-    useEffect(() => {
-
-        axios.get(COMMUNE_URL + (idDistrict || '01'))
-            .then(res => {
-                setCommune(res.data)
-                setIdCommune(res.data[0].idCommune)
-                localStorage.setItem('commune', JSON.stringify(res.data))
-            })
-    }, [idDistrict])
-
     return (
         <div style={{ marginTop: headerHeight + 'px' }} className='h-[48vh] relative'>
             <OrderReview {...{ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }} />
@@ -69,7 +32,7 @@ const PaymentOrder = () => {
                     <CiLocationOn /> <p className='capitalize'>Địa Chỉ Nhận Hàng</p>
                 </div>
                 <div>{!province && <p>Đang tải dữ liệu tỉnh thành <div className='animate-spin border-[2px] border-t-red-200'></div></p>}</div>
-                {/* <div className='flex items-center mt-5 gap-3'>
+                <div className='flex items-center mt-5 gap-3'>
                     <LocationSelect chooseProvince {...{
                         title: 'Thành Phố/Tỉnh', setRecipientInfo,
                         dataLocation: province, updateIdSelect: setIdProvince, idSelect: idProvince,
@@ -85,7 +48,7 @@ const PaymentOrder = () => {
                         dataLocation: commune, updateIdSelect: setIdCommune, idSelect: idCommune,
                         nameIdSelect: 'idCommune', nameSelect: 'commune'
                     }} />
-                </div> */}
+                </div>
                 <div className='mt-2'>
                     <label htmlFor="">Địa chỉ cụ thể số nhà/Làng <span className='text-red-500'>*</span></label>
                     <input type="text" className='border ml-2  px-2 py-1' value={recipientInfo.addressDetail}

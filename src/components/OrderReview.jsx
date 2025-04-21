@@ -14,7 +14,7 @@ const OrderReview = ({ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }) =
         // localStorage.setItem('cart', '{}')
         // axios.patch()
         // navigate('/orderConfirmationPage')
-        alert('đang nâng cấp xin vui lòng đợi')
+        alert('đang cập nhật tính năng xin vui lòng đợi')
     }
 
     return (

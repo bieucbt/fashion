@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
-import { COMMUNE_URL, PRODUCT_URL, PROVINCE_URL, USER_URL } from '../config/constants'
+import { COMMUNE_URL, DISTRICT_URL, PRODUCT_URL, PROVINCE_URL, USER_URL } from '../config/constants'
 import { showToast } from '../utils/toastUtils'
 import { useImmer } from 'use-immer'
 
@@ -27,6 +27,14 @@ const DataProvider = ({ children }) => {
     const [email, setEmail] = useState('')
     // set login signup mobile xem cái nào sẽ được hiển thị
     const [isLogin, setIsLogin] = useState(true)
+
+    // state quản lý thông tin mua hàng
+    const [province, setProvince] = useState(JSON.parse(localStorage.getItem('province')) || [])
+    const [district, setDistrict] = useState(JSON.parse(localStorage.getItem('district')) || [])
+    const [commune, setCommune] = useState(JSON.parse(localStorage.getItem('commune')) || [])
+    const [idProvince, setIdProvince] = useState('01')
+    const [idDistrict, setIdDistrict] = useState('001')
+    const [idCommune, setIdCommune] = useState('00001')
 
     const handleUpdateCart = (newCart) => {
         axios.patch(
@@ -89,6 +97,41 @@ const DataProvider = ({ children }) => {
         setCart({});
     }
 
+    useEffect(() => {
+        axios.get(PROVINCE_URL)
+            .then(res => {
+                localStorage.setItem('province', JSON.stringify(res.data))
+                setProvince(res.data)
+                setIdProvince(res.data[0].idProvince)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        axios.get(DISTRICT_URL + (idProvince || '001'))
+            .then(res => {
+                setIdDistrict(res.data[0].idDistrict || '001')
+                setDistrict(res.data)
+                localStorage.setItem('district', JSON.stringify(res.data))
+                axios.get(COMMUNE_URL + (res.data[0].idDistrict))
+                    .then(res => {
+                        setCommune(res.data)
+                        setIdCommune(res.data[0].idCommune)
+                        localStorage.setItem('commune', JSON.stringify(res.data))
+                    })
+            })
+    }, [idProvince])
+
+    useEffect(() => {
+
+        axios.get(COMMUNE_URL + (idDistrict || '01'))
+            .then(res => {
+                setCommune(res.data)
+                setIdCommune(res.data[0].idCommune)
+                localStorage.setItem('commune', JSON.stringify(res.data))
+            })
+    }, [idDistrict])
+
 
     useEffect(() => {
 
@@ -131,7 +174,10 @@ const DataProvider = ({ children }) => {
         isLogin, setIsLogin,
         addToCart, login, logout,
         token, email, removeItemCart,
-        handleUpdateCart
+        handleUpdateCart,
+        province, district, setDistrict, commune, setCommune,
+        idProvince, setIdProvince, idDistrict, setIdDistrict,
+        idCommune, setIdCommune
     }
 
     return (
