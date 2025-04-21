@@ -2,11 +2,20 @@ import React, { memo } from 'react'
 import { MdClose } from 'react-icons/md'
 import useDataContext from '../hook/useDataContext'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const OrderReview = ({ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }) => {
 
     const navigate = useNavigate()
+    const { setCart } = useDataContext()
 
+    const submitOrder = () => {
+        // setCart({})
+        // localStorage.setItem('cart', '{}')
+        // axios.patch()
+        // navigate('/orderConfirmationPage')
+        alert('đang nâng cấp xin vui lòng đợi')
+    }
 
     return (
         <div className={`${hiddenBoxPayment ? '' : 'hidden'} fixed inset-0 grid place-content-center`}>
@@ -23,7 +32,7 @@ const OrderReview = ({ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }) =
                     <p>{recipientInfo.phone}</p>
                 </div>
                 <div className='flex justify-end items-center'><button className='bg-black text-white rounded p-1'
-                    onClick={() => navigate('/orderConfirmationPage')}>OK</button></div>
+                    onClick={submitOrder}>OK</button></div>
             </div>
         </div>
     )

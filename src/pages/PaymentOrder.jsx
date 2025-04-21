@@ -63,7 +63,8 @@ const PaymentOrder = () => {
 
     return (
         <div style={{ marginTop: headerHeight + 'px' }} className='h-[48vh] relative'>
-            <OrderReview {...{ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }} />
+            <h3>hello</h3>
+            {/* <OrderReview {...{ recipientInfo, hiddenBoxPayment, setHiddenBoxPayment }} />
             <div>
                 <div className='flex items-center gap-1'>
                     <CiLocationOn /> <p className='capitalize'>Địa Chỉ Nhận Hàng</p>
@@ -118,7 +119,7 @@ const PaymentOrder = () => {
                         } else
                             setHiddenBoxPayment(true)
                     }}>Mua Hàng</div>
-            </div>
+            </div> */}
         </div>
     )
 }
