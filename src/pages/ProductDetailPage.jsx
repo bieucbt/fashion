@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom'
 import useDataContext from '../hook/useDataContext'
 import { CLOUDINARY_URL } from '../config/constants'
 import { IoMdArrowRoundBack } from "react-icons/io";
+import QuantityController from '@components/QuantityController';
 
 const ProductDetailPage = () => {
     const { product } = useLocation().state
     const { headerHeight, setCart, token } = useDataContext()
-    const [countCart, setCountCart] = useState(0)
     const { _id, color, count, description, img,
         name, price, size
     } = product
@@ -18,16 +18,7 @@ const ProductDetailPage = () => {
     const [colorIndex, setColorIndex] = useState(0)
     const [sizeIndex, setSizeIndex] = useState(0)
     const { addToCart } = useDataContext()
-
-
-    const updateQuantity = (number) => {
-
-        if (count <= 0) {
-            alert('sản phẩm đã hết hàng')
-        }
-        else
-            setCountCart(prev => prev += number)
-    }
+    const [countCart, setCountCart] = useState(0)
 
     useEffect(() => {
         scrollTo({ top: 0 })
@@ -38,6 +29,13 @@ const ProductDetailPage = () => {
             setCountCart(count)
         }
     }, [countCart])
+
+    const updateQuantity = (num) => {
+        if (countCart <= 0) return
+        else {
+            setCountCart(prev => prev += num)
+        }
+    }
 
     const handleAddToCart = () => {
         if (token)
@@ -94,13 +92,7 @@ const ProductDetailPage = () => {
                         <div className='mt-4'><strong>{count}</strong> số lượng có sẵn</div>
 
                         <div className='flex items-center gap-2 mt-3 h-[40px]'>
-
-                            <div className='flex items-center border-gray-300 border-[2px] text-[25px]
-                            text-gray-300'>
-                                <div className='px-2 cursor-pointer duration-500 ease-linear hover:text-blackText select-none' onClick={() => updateQuantity(-1)}>-</div>
-                                <div className='text-blackText px-4'>{countCart}</div>
-                                <div className='px-2 cursor-pointer duration-500 ease-linear hover:text-blackText select-none' onClick={() => updateQuantity(+1)}>+</div>
-                            </div>
+                            <QuantityController {...{ updateQuantity, countCart }} />
                             <div className='flex-1 grid place-content-center h-full uppercase font-bold bg-blackText text-white border-[2px] border-blackText hoverBgWhite 
                             cursor-pointer select-none'
                                 onClick={handleAddToCart}>Thêm vào giỏ</div>

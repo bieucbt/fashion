@@ -8,7 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@components': path.relative('src', 'components'),
-      '@hook': path.relative('src', 'hook')
+      '@hook': path.relative('src', 'hook'),
+      '@pages': path.relative('src', 'pages'),
     }
   }
 })

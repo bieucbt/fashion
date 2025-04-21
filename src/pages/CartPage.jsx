@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import useDataContext from '../hook/useDataContext'
-import { CLOUDINARY_URL } from '../config/constants'
+import React, { useEffect, useState } from 'react'
+import useDataContext from '@hook/useDataContext'
 import { IoMdArrowRoundBack } from 'react-icons/io'
+import ProductCartItem from '@components/ProductCartItem'
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
-    const { headerHeight, products, cart, removeItemCart } = useDataContext()
+    const { headerHeight, products, cart } = useDataContext()
     const [listProductCart, setListProductCart] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         const draft = []
         const productCart = () => {
@@ -17,8 +18,6 @@ const CartPage = () => {
         productCart()
         setListProductCart(draft)
     }, [cart])
-
-
 
     return (
         <div style={{ marginTop: headerHeight + 'px' }}>
@@ -40,18 +39,12 @@ const CartPage = () => {
                             <div>xóa</div>
                         </div>
                         {
-                            listProductCart.map((product, id) => <div key={id}
-                                className='grid grid-cols-6 my-2 items-center border-b-[1px] border-gray-200 pb-5'>
-                                <div><img src={CLOUDINARY_URL + product.img} alt="product" /></div>
-                                <div>{product.name}</div>
-                                <div>{product.price}</div>
-                                <div>{product.count}</div>
-                                <div>{product.price * product.count || 'lỗi'}</div>
-                                <div className='cursor-pointer'
-                                    onClick={() => removeItemCart(product._id)}
-                                >xóa</div>
-                            </div>)
+                            listProductCart.map((product, id) => <ProductCartItem key={id} {...{ product }} />)
                         }
+                        <div className='text-[20px] font-bold flex items-center justify-end'>
+                            <div className=' hoverBgWhite hover:border cursor-pointer bg-black text-white rounded-md px-3 py-1'
+                                onClick={() => navigate('/payment')}>Đặt hàng</div>
+                        </div>
                     </div> : <div className='text-center font-semibold text-[20px]'>Bạn chưa thêm sản phẩm nào vào rỏ hàng</div>
             }
         </div>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
-import { PRODUCT_URL, USER_URL } from '../config/constants'
+import { COMMUNE_URL, PRODUCT_URL, PROVINCE_URL, USER_URL } from '../config/constants'
 import { showToast } from '../utils/toastUtils'
 import { useImmer } from 'use-immer'
 
@@ -28,6 +28,14 @@ const DataProvider = ({ children }) => {
     // set login signup mobile xem cái nào sẽ được hiển thị
     const [isLogin, setIsLogin] = useState(true)
 
+    const handleUpdateCart = (newCart) => {
+        axios.patch(
+            `${USER_URL}cart`,
+            { cart: JSON.stringify(newCart) },
+            { headers: { Authorization: `Bearer ${token}` } }
+        )
+            .catch(err => showToast('error', err.message));
+    }
 
     const addToCart = (productId, CartQuantity) => {
         setCart(draft => {
@@ -35,12 +43,7 @@ const DataProvider = ({ children }) => {
             const updatedCart = { ...draft };
             sessionStorage.setItem('cart', JSON.stringify(updatedCart));
             setCart(updatedCart)
-            axios.patch(
-                `${USER_URL}cart`,
-                { cart: JSON.stringify(updatedCart) },
-                { headers: { Authorization: `Bearer ${token}` } }
-            )
-                .catch(err => showToast('error', err.message));
+            handleUpdateCart(updatedCart)
         });
     }
 
@@ -54,7 +57,7 @@ const DataProvider = ({ children }) => {
                 { cart: JSON.stringify(updatedCart) },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
-                .then(res => console.log(res))
+                .then(res => setCart(JSON.parse(res.data.cart)))
                 .catch(err => showToast('error', err.message));
         });
     }
@@ -70,7 +73,7 @@ const DataProvider = ({ children }) => {
             setToken(token);
             setEmail(email);
             setCart(typeof cart === 'string' ? JSON.parse(cart) : cart || {});
-            sessionStorage.setItem('cart', JSON.stringify(cart || {}));
+            sessionStorage.setItem('cart', cart || '{}');
             showToast('success', 'Đăng nhập thành công');
         } catch (error) {
             showToast('error', `Đăng nhập thất bại: ${error.message}`);
@@ -90,11 +93,18 @@ const DataProvider = ({ children }) => {
     useEffect(() => {
 
         try {
-            const { token, email } = JSON.parse(sessionStorage.getItem('data'));
-            setToken(token);
-            setEmail(email);
-            const storedCart = sessionStorage.getItem('cart');
-            setCart(storedCart ? JSON.parse(storedCart) : {});
+            if (JSON.parse(sessionStorage.getItem('data'))) {
+                const { token, email } = JSON.parse(sessionStorage.getItem('data'));
+                setToken(token);
+                setEmail(email);
+
+                const storedCart = sessionStorage.getItem('cart');
+                if (storedCart) {
+                    setCart(JSON.parse(storedCart) || {});
+                }
+
+            }
+
         } catch (error) {
             console.error('Error parsing sessionStorage data:', error);
         }
@@ -120,7 +130,8 @@ const DataProvider = ({ children }) => {
         cart, setCart,
         isLogin, setIsLogin,
         addToCart, login, logout,
-        token, email, removeItemCart
+        token, email, removeItemCart,
+        handleUpdateCart
     }
 
     return (

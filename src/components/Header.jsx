@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import useDataContext from "../hook/useDataContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { showToast } from "../utils/toastUtils";
-import { HOME_fASHION } from "../config/constants";
 
 const Header = () => {
   const [activeMenuMobile, setActiveMenuMobile] = useState(false)
@@ -76,9 +75,9 @@ const Header = () => {
           {
             token ? <div className="">
               <div className="flex items-center gap-5">
-                <div className="relative cursor-pointer">
-                  <FaShoppingCart size={30} className=""
-                    onClick={() => navigate('/cart')} />
+                <div className="relative cursor-pointer"
+                  onClick={() => navigate('/cart')}>
+                  <FaShoppingCart size={30} />
                   {Object.keys(cart).length > 0 && <div className="absolute bottom-[-5px] right-[-5px] rounded-full h-[20px] grid place-content-center text-white bg-red-600 
                   aspect-square">{Object.keys(cart).length || undefined}</div>}
                 </div>

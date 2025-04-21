@@ -2,11 +2,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header'
 import Footer from './components/Footer';
 import './App.css'
-import { Home, LoginSignupForm, ProductList } from './pages';
+import {
+  Home, LoginSignupForm, ProductList, ProductDetailPage,
+  CartPage, PaymentOrder,
+  OrderConfirmationPage
+} from './pages';
 import { ToastContainer } from 'react-toastify';
 import DataProvider from './context/DataProvider';
-import ProductDetailPage from './pages/ProductDetailPage';
-import CartPage from './pages/CartPage';
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
             <Route path="/productList" element={<ProductList />} />
             <Route path="/productDetail" element={<ProductDetailPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/payment" element={<PaymentOrder />} />
+            <Route path="/orderConfirmationPage" element={<OrderConfirmationPage />} />
           </Routes>
         </div>
       </DataProvider>
