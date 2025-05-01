@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import useDataContext from "../hook/useDataContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { showToast } from "../utils/toastUtils";
+import { FaCaretDown } from "react-icons/fa";
 
 const Header = () => {
   const [activeMenuMobile, setActiveMenuMobile] = useState(false)
@@ -51,7 +52,7 @@ const Header = () => {
 
   return (
     <header ref={headerHeightRef} className={`fixed top-0 left-0 right-0 duration-300 ease-linear ${windowScrollY > 1 && 'bg-white shadow-menu'} z-50`}>
-      <div className="container mx-auto h-[74px] flex items-center justify-between text-blackText px-4">
+      <div className="relative container mx-auto h-[74px] flex items-center justify-between text-blackText px-4">
         {/* modal search */}
         <ModalSearch {...{ activeModalSearch, setActiveModalSearch }} />
         {/* Menu Mobile */}
@@ -82,10 +83,13 @@ const Header = () => {
                   aspect-square">{Object.keys(cart).length || undefined}</div>}
                 </div>
                 <div className="relative group">
-                  <span className="cursor-pointer peer">{email || 'tài khoản'}</span>
-                  <div className="hidden absolute top-full right-0 bg-green-300 group-hover:block w-max
-                  cursor-pointer" onClick={handleLogout}>
-                    Đăng xuất
+                  <div className="cursor-pointer peer flex items-center">{email || 'tài khoản'} <FaCaretDown /></div>
+                  <div className="hidden absolute top-full right-0 group-hover:block w-max
+                  cursor-pointer bg-black text-white px-5 py-3 rounded-md" >
+                    {/* <div onClick={handleLogout}>Tài khoản của tôi</div> */}
+                    <div onClick={() => navigate('/orderConfirmationPage')} className="mt-2 font-medium hover:text-cyan-400 py-1">Đơn mua</div>
+                    <div onClick={handleLogout} className="mt-2 font-medium hover:text-cyan-400 py-1">Đăng xuất</div>
+
                   </div>
                 </div>
               </div>

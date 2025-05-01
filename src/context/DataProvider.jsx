@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
-import { COMMUNE_URL, DISTRICT_URL, PRODUCT_URL, PROVINCE_URL, USER_URL } from '../config/constants'
+import { COMMUNE_URL, DISTRICT_URL, ORDER_URL, PRODUCT_URL, PROVINCE_URL, USER_URL } from '../config/constants'
 import { showToast } from '../utils/toastUtils'
 import { useImmer } from 'use-immer'
 
@@ -11,15 +11,7 @@ const DataProvider = ({ children }) => {
 
     const [headerHeight, setHeaderHeight] = useState(0)
 
-    const [products, setProducts] = useState(() => {
-        try {
-            const storageProduct = localStorage.getItem('products');
-            return storageProduct ? JSON.parse(storageProduct) : [];
-        } catch (error) {
-            console.error('Error parsing products from localStorage:', error);
-            return [];
-        }
-    })
+    const [products, setProducts] = useState(JSON.parse(localStorage.getItem('products')) || [])
 
 
     const [cart, setCart] = useImmer({})
@@ -145,7 +137,6 @@ const DataProvider = ({ children }) => {
                 if (storedCart) {
                     setCart(JSON.parse(storedCart) || {});
                 }
-
             }
 
         } catch (error) {
@@ -163,13 +154,15 @@ const DataProvider = ({ children }) => {
                 showToast('error', `Lỗi khi lấy sản phẩm: ${err.message}`);
             }
         };
-        fetchProducts();
+
+        fetchProducts()
 
     }, [])
 
+
     const data = {
         headerHeight, setHeaderHeight,
-        products,
+        products, setProducts,
         cart, setCart,
         isLogin, setIsLogin,
         addToCart, login, logout,

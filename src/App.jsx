@@ -15,22 +15,24 @@ function App() {
 
   return (
     <BrowserRouter>
-      <DataProvider>
-        <ToastContainer />
-        <div className='container mx-auto px-4 relative'>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/loginOrSignUp" element={<LoginSignupForm />} />
-            <Route path="/productList" element={<ProductList />} />
-            <Route path="/productDetail" element={<ProductDetailPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/payment" element={<PaymentOrder />} />
-            <Route path="/orderConfirmationPage" element={<OrderConfirmationPage />} />
-          </Routes>
-        </div>
-      </DataProvider>
-      <Footer />
+      <div className='h-[95vh]'>
+        <DataProvider>
+          <ToastContainer />
+          <div className='container mx-auto px-4 relative'>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/loginOrSignUp" element={<LoginSignupForm />} />
+              <Route path="/productList" element={<ProductList />} />
+              <Route path="/productDetail" element={<ProductDetailPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/payment" element={<PaymentOrder />} />
+              <Route path="/orderConfirmationPage" element={<OrderConfirmationPage />} />
+            </Routes>
+          </div>
+        </DataProvider>
+        <Footer />
+      </div>
     </BrowserRouter>
   )
 }

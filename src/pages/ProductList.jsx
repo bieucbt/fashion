@@ -6,8 +6,6 @@ import ProductPageNumbers from '@components/ProductPageNumbers';
 const ProductList = () => {
     const { headerHeight, products } = useDataContext()
 
-
-
     return (
         <div className='' style={{ marginTop: headerHeight + 'px' }}>
             <div className='py-5 cursor-pointer'>

@@ -2,6 +2,7 @@
 
 const USER_URL = 'https://servertest-mmh4.onrender.com/user/';
 const PRODUCT_URL = 'https://servertest-mmh4.onrender.com/product/'
+const ORDER_URL = 'https://servertest-mmh4.onrender.com/order/';
 const Admin_URL = 'https://adminfashion.onrender.com'
 const HOME_fASHION = 'https://fashion-ewea.onrender.com/'
 
@@ -11,6 +12,7 @@ const COMMUNE_URL = 'https://vietnam-administrative-division-json-server-swart.v
 
 // const USER_URL = 'http://localhost:3000/user/';
 // const PRODUCT_URL = 'http://localhost:3000/product/';
+// const ORDER_URL = 'http://localhost:3000/order/';
 // const Admin_URL = 'http://localhost:5174/'
 // const HOME_fASHION = 'http://localhost:5173/'
 
@@ -24,5 +26,6 @@ export {
     HOME_fASHION,
     COMMUNE_URL,
     DISTRICT_URL,
-    PROVINCE_URL
+    PROVINCE_URL,
+    ORDER_URL
 }
